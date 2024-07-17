@@ -46,6 +46,11 @@ until attemps == 0
   word = ""
   puts "write letter"
   letter = gets.chomp
+  until letter.length == 1
+    puts "Please enter a single character."
+    letter = gets.chomp
+  end
+
   if secret_word.include?(letter)
     puts "correct letter"
     p correct_letters << letter
@@ -62,6 +67,11 @@ until attemps == 0
     end
   end
   puts word
+  puts "attemps left #{attemps}"
+  if word == secret_word
+    puts "you win!"
+    break
+  end
   # word << display(secret_word, letter)
   # secret_word.each_char do |char|
   #   if char == letter
@@ -75,8 +85,4 @@ until attemps == 0
   # p words.select { |word| word.select { |char| char != '*' }}
 end
 
-
-
-p incorrect_letters
-p correct_letters
 puts "Secret word was #{secret_word}"
