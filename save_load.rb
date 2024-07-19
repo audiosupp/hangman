@@ -3,16 +3,16 @@
 require 'yaml'
 
 # save, load or view save game files
-
 module SaveLoadView
-  def save_the_game(secret_word, correct_letters, incorrect_letters, attempts)
+  def save_the_game(secret_word, correct_letters, incorrect_letters, attempts, word)
     save_dir = 'save_files'
     Dir.mkdir(save_dir) unless Dir.exist?(save_dir)
     data = {
       secret_word: secret_word,
       correct_letters: correct_letters,
       incorrect_letters: incorrect_letters,
-      attempts: attempts
+      attempts: attempts,
+      word: word
     }
     filename = "save_data_#{Time.now.strftime('%Y%m%d_%H%M%S')}.yml"
     save_path = File.join(save_dir, filename)

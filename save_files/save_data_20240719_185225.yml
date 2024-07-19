@@ -1,9 +1,10 @@
 ---
-:secret_word: hydrocodone
+:secret_word: vegas
 :correct_letters:
-- e
+- a
 :incorrect_letters:
+- p
+- l
 - m
-- g
-- t
 :attempts: 3
+:word: ___a_

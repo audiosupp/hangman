@@ -8,6 +8,7 @@ class Game
     @incorrect_letters = []
     @correct_letters = []
     @attempts = 6
+    @word = ''
   end
 
   def pick_random_word
@@ -20,39 +21,39 @@ class Game
   def menu
     puts 'start game (1), load game (2), save game (3)'
     input = gets.chomp
-    if input == '1'
-      game_start
-    end
+    game_start if input == '1'
     if input == '2'
       data = game_load
       @secret_word = data[:secret_word]
       @correct_letters = data[:correct_letters]
       @incorrect_letters = data[:incorrect_letters]
       @attempts = data[:attempts]
+      @word = data[:word]
+      puts "game loaded.
+        word: #{@word}
+        correct letters: #{@correct_letters}
+        incorrect letters: #{@incorrect_letters}
+        attempts: #{@attempts}"
       game_start
     end
-    if input == '3'
-      save_the_game(@secret_word, @correct_letters, @incorrect_letters, @attempts)
-    end
+    save_the_game(@secret_word, @correct_letters, @incorrect_letters, @attempts, @word) if input == '3'
   end
 
   def game_load
     display_saved_files
     puts 'entry save file'
     input = gets.chomp
-    data = load_game(input)
-    data
+    load_game(input)
   end
 
   def game_start
     until @attempts.zero?
-      puts 'write a letter (or menu for load/save a game)'
+      puts 'write a letter (or menu for load/save a game) or (0) for exit'
       word = ''
       letter = gets.chomp
 
-      if letter == 'menu'
-        menu
-      end
+      menu if letter == 'menu'
+      break if letter == '0'
 
       until letter.length == 1
         puts 'Please enter a single character.'
@@ -78,6 +79,7 @@ class Game
       puts word
       puts "attemps left #{@attempts}"
       puts "incorrect letters: #{@incorrect_letters.join(', ')}"
+      @word = word
       if word == @secret_word
         puts 'you win!'
         puts "Secret word was #{@secret_word}"

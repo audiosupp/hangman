@@ -1,8 +1,9 @@
 ---
-:secret_word: financing
+:secret_word: template
 :correct_letters:
-- a
-- f
+- t
+- l
 :incorrect_letters:
-- o
+- h
 :attempts: 5
+:word: t___l_t_
