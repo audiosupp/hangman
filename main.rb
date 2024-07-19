@@ -28,6 +28,18 @@ def save_the_game(secret_word, correct_letters, incorrect_letters, attempts)
   puts "Data saved to: #{save_path}"
 end
 
+def load_game(file)
+  save_dir = "save_files"
+  data = YAML.load_file("#{save_dir}/#{file}")
+end
+
+def display_saved_files
+  save_dir = "save_files"
+  save_files = Dir.entries(save_dir)
+  puts save_files
+end
+
+
 p secret_word = pick_random_word
 
 incorrect_letters = []
@@ -37,8 +49,19 @@ attempts = 6
 
 until attempts.zero?
   word = ""
-  puts "write letter or save the game? (2)"
+  puts "write letter or save the game? (2) or load game (1)"
   letter = gets.chomp
+  if letter == "1"
+    display_saved_files
+    puts "entry save file"
+    input = gets.chomp
+    data = load_game(input)
+    secret_word = data[:secret_word]
+    correct_letters = data[:correct_letters]
+    incorrect_letters = data[:incorrect_letters]
+    attempts = data[:attempts]
+    # count as attempt, fix that
+  end
   if letter == "2"
     save_the_game(secret_word, correct_letters, incorrect_letters, attempts)
     break

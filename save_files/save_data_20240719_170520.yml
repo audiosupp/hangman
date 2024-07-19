@@ -1,0 +1,8 @@
+---
+:secret_word: polymer
+:correct_letters:
+- o
+:incorrect_letters:
+- z
+- v
+:attempts: 4
